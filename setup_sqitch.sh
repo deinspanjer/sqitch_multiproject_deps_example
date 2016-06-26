@@ -60,10 +60,10 @@ _pause
 echo
 echo "Here are the current plans:"
 print_cmds on
-sqitch -f proj1.plan plan
+sqitch --plan-file proj1.plan plan
 sqitch status proj1
 echo
-sqitch -f proj2.plan plan
+sqitch --plan-file proj2.plan plan
 sqitch status proj2
 print_cmds off
 
@@ -76,7 +76,7 @@ echo "So, we'll do it this way instead."
 
 _pause
 print_cmds on
-sqitch -f proj2.plan add create_a_table -r 'proj1:create_proj2_db' -n "Create proj2 table"
+sqitch --plan-file proj2.plan add create_a_table -r 'proj1:create_proj2_db' -n "Create proj2 table"
 sed -i '' -e "s/.*XXX.*/CREATE TABLE proj2_test_table;/" deploy/create_a_table.sql
 sed -i '' -e "s/.*XXX.*/DROP TABLE proj2_test_table;/" revert/create_a_table.sql
 print_cmds off
@@ -85,10 +85,10 @@ _pause
 echo
 echo "Here are the current plans:"
 print_cmds on
-sqitch -f proj1.plan plan
+sqitch --plan-file proj1.plan plan
 sqitch status proj1
 echo
-sqitch -f proj2.plan plan
+sqitch --plan-file proj2.plan plan
 sqitch status proj2
 print_cmds off
 
