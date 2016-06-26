@@ -16,7 +16,13 @@ source make_sqitch_alias.sh
 
 mkdir -p src
 cd src
+echo
+echo "Clearing out old files from any previous runs..."
 rm -rf .git *
+echo "Trying to clear out any old data from the Docker pg instance..."
+DOCKER_PG_PORT=$(docker port db 5432)
+psql -h localhost -p ${DOCKER_PG_PORT#*:} -U postgres postgres -c 'drop database proj2'
+psql -h localhost -p ${DOCKER_PG_PORT#*:} -U postgres postgres -c 'drop schema sqitch cascade;'
 git init .
 touch README.md
 git add .
